@@ -1,0 +1,18 @@
+{
+  "package": {
+    "name": "kotlinbukkit",
+    "repo": "Final_Repo",
+    "subject": "finalchild"
+  },
+  "version": {
+    "name": "1.0.0-SNAPSHOT",
+    "gpgSign": true
+  },
+  "files": [
+    {
+      "includePattern": "build\/upload\/(.*)",
+      "uploadPattern": "$1"
+    }
+  ],
+  "publish": true
+}

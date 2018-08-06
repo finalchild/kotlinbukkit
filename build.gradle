@@ -1,0 +1,195 @@
+/*
+ * Copyright 2017-2018 Bak Jaeon (finalchild) and Ranol
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.2.60'
+    id 'com.github.johnrengelman.shadow' version '2.0.4'
+    id 'java-library'
+    id 'maven'
+    id 'maven-publish'
+}
+
+group 'me.finalchild'
+version '1.0.0-SNAPSHOT'
+
+description 'A Bukkit plugin to support writing scripts and plugins with Kotlin.'
+
+repositories {
+    jcenter()
+    maven {
+        name 'DestroysTokyo Repository'
+        url 'https://repo.destroystokyo.com/repository/maven-public/'
+    }
+    maven {
+        name 'Sonatype OSSRH'
+        url 'https://oss.sonatype.org/content/repositories/snapshots/'
+    }
+}
+
+dependencies {
+    compile(group: 'com.destroystokyo.paper', name: 'paper-api', version: '1.13-R0.1-SNAPSHOT') {
+        exclude group: 'junit', module: 'junit'
+    }
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8'
+}
+
+sourceCompatibility = 10
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+compileJava {
+    inputs.property('moduleName', 'me.finalchild.kotlinbukkit');
+    doFirst {
+        options.compilerArgs = [
+                '--module-path', classpath.asPath
+        ]
+        classpath = files()
+    }
+}
+
+compileKotlin.destinationDir = compileJava.destinationDir
+
+kotlin {
+    experimental {
+        coroutines 'enable'
+    }
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+processResources {
+    filteringCharset 'UTF-8'
+    expand(
+            name: project.name,
+            version: project.version,
+            description: project.description
+    )
+}
+
+shadowJar {
+    dependencies {
+        exclude dependency(group: 'com.destroystokyo.paper', name: 'paper-api')
+        exclude dependency(group: 'commons-lang', name: 'commons-lang')
+        exclude dependency(group: 'com.googlecode.json-simple', name: 'json-simple')
+        exclude dependency(group: 'com.google.code.findbugs', name: 'jsr305')
+        exclude dependency(group: 'net.md-5', name: 'bungeecord-chat')
+        exclude dependency(group: 'com.google.guava', name: 'guava')
+        exclude dependency(group: 'com.google.code.gson', name: 'gson')
+        exclude dependency(group: 'org.yaml', name: 'snakeyaml')
+        exclude dependency(group: 'org.slf4j', name: 'slf4j-api')
+        exclude dependency(group: 'org.ow2.asm', name: 'asm-commons')
+        exclude dependency(group: 'org.ow2.asm', name: 'asm-analysis')
+        exclude dependency(group: 'org.ow2.asm', name: 'asm-tree')
+        exclude dependency(group: 'org.ow2.asm', name: 'asm')
+    }
+    classifier = 'uber'
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    group = JavaBasePlugin.DOCUMENTATION_GROUP
+    description = 'Assembles sources JAR'
+    classifier = 'sources'
+}
+
+artifacts {
+    archives jar
+    archives shadowJar
+    archives sourcesJar
+}
+
+def pomConfig = {
+    name project.name
+    description project.description
+    inceptionYear 2017
+    licenses {
+        license {
+            name 'Apache License Version 2.0'
+            url 'http://www.apache.org/licenses/LICENSE.txt-2.0'
+            distribution 'repo'
+        }
+    }
+
+    developers {
+        developer {
+            id 'finalchild'
+            name 'Bak Jaeon'
+            email 'finalchild2@gmail.com'
+            url 'https://finalchild.me'
+            organization 'Our Minecraft Space'
+            organizationUrl 'https://ourmc.space'
+            roles {
+                role 'developer'
+            }
+            timezone 'Asia/Seoul'
+        }
+        developer {
+            id 'RanolP'
+            name 'Ranol'
+            email 'asdhugh1@gmail.com'
+            url 'https://ranolp.github.io/'
+            roles {
+                role 'developer'
+            }
+            timezone 'Asia/Seoul'
+        }
+    }
+
+    scm {
+        connection 'scm:git:https://github.com/finalchild/kotlinbukkit.git'
+        developerConnection 'scm:git:https://github.com/finalchild/kotlinbukkit.git'
+        url 'https://github.com/finalchild/kotlinbukkit'
+    }
+}
+
+publishing {
+    publications {
+        MyPublication(MavenPublication) {
+            from components.java
+            afterEvaluate {
+                artifact shadowJar
+                artifact sourcesJar
+            }
+            groupId project.group
+            artifactId project.name
+            version project.version
+            pom.withXml {
+                def root = asNode()
+                root.children().last() + pomConfig
+            }
+        }
+    }
+}
+
+model {
+    tasks.generatePomFileForMyPublicationPublication {
+        destination = file("${buildDir}/libs/${project.name}-${project.version}.pom")
+    }
+}
+
+task prepareUpload(type: Copy, dependsOn: ['build', 'generatePomFileForMyPublicationPublication']) {
+    from 'build/libs'
+    into "build/upload/me/finalchild/${project.name}/${project.version}"
+    include "kotlinbukkit-${project.version}.jar"
+    include "kotlinbukkit-${project.version}-sources.jar"
+    include "kotlinbukkit-${project.version}.pom"
+}

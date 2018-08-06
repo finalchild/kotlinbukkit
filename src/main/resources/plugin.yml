@@ -1,0 +1,7 @@
+name: ${name}
+version: ${version}
+description: ${description}
+author: Final Child
+authors: [Ranol]
+main: me.finalchild.kotlinbukkit.KotlinBukkit
+api-version: 1.13
