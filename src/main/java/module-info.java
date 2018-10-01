@@ -1,6 +1,6 @@
 module me.finalchild.kotlinbukkit {
     requires kotlin.stdlib;
-    requires paper.api;
+    requires org.bukkit;
     requires bungeecord.chat;
     requires java.logging;
     requires gson;
