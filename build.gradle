@@ -30,8 +30,8 @@ description 'Provides Kotlin stdlib and extensions to Bukkit plugins.'
 repositories {
     jcenter()
     maven {
-        name 'DestroysTokyo Repository'
-        url 'https://repo.destroystokyo.com/repository/maven-public/'
+        name 'PaperMC Repository'
+        url 'https://papermc.io/repo/repository/maven-public/'
     }
     maven {
         name 'Sonatype OSSRH'
@@ -40,7 +40,7 @@ repositories {
 }
 
 dependencies {
-    compile(group: 'com.destroystokyo.paper', name: 'paper-api', version: '1.13-R0.1-SNAPSHOT') {
+    compile(group: 'com.destroystokyo.paper', name: 'paper-api', version: '1.13.1-R0.1-SNAPSHOT') {
         exclude group: 'junit', module: 'junit'
     }
     compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8'
