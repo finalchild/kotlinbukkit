@@ -16,7 +16,7 @@
 
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.2.71'
-    id 'com.github.johnrengelman.shadow' version '4.0.2-SNAPSHOT'
+    id 'com.github.johnrengelman.shadow' version '4.0.2'
     id 'java-library'
     id 'maven'
     id 'maven-publish'
