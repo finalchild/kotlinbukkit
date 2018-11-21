@@ -5,7 +5,7 @@
     "subject": "finalchild"
   },
   "version": {
-    "name": "1.0.0-rc.2",
+    "name": "1.0.0-rc.3-SNAPSHOT",
     "gpgSign": true
   },
   "files": [
