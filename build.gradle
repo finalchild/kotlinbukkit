@@ -40,7 +40,7 @@ repositories {
 }
 
 dependencies {
-    compile(group: 'com.destroystokyo.paper', name: 'paper-api', version: '1.13.1-R0.1-SNAPSHOT') {
+    compile(group: 'com.destroystokyo.paper', name: 'paper-api', version: '1.13.2-R0.1-SNAPSHOT') {
         exclude group: 'junit', module: 'junit'
     }
     compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8'
