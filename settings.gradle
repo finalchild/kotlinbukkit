@@ -15,5 +15,4 @@
  */
 
 rootProject.name = 'kotlinbukkit'
-enableFeaturePreview('STABLE_PUBLISHING')
 
