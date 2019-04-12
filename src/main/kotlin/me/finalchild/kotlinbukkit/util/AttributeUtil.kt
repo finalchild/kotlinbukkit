@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2018 Bak Jaeon (finalchild) and Ranol
+ * Copyright 2017-2019 Bak Jaeon (finalchild) and Ranol
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ import org.bukkit.attribute.AttributeModifier
  * @param attribute the attribute to get
  * @return the attribute instance or null if not applicable to this object
  */
-operator fun Attributable.get(attribute: Attribute): AttributeInstance = getAttribute(attribute)
+operator fun Attributable.get(attribute: Attribute): AttributeInstance? = getAttribute(attribute)
 
 /**
  * Add a modifier to this instance.

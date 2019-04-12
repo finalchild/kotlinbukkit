@@ -1,6 +1,6 @@
 language: java
 jdk:
-- openjdk11
+- openjdk12
 before_deploy: "./gradlew prepareUpload"
 deploy:
 - provider: releases

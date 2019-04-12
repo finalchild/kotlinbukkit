@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2018 Bak Jaeon (finalchild) and Ranol
+ * Copyright 2017-2019 Bak Jaeon (finalchild) and Ranol
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,16 +18,16 @@ package me.finalchild.kotlinbukkit.util
 
 import org.bukkit.util.Vector
 
-operator fun Vector.plus(b: Vector) = clone().add(b)!!
-operator fun Vector.minus(b: Vector) = clone().subtract(b)!!
+operator fun Vector.plus(b: Vector) = clone().add(b)
+operator fun Vector.minus(b: Vector) = clone().subtract(b)
 
 operator fun Vector.unaryPlus() = clone()
-operator fun Vector.unaryMinus() = clone().multiply(-1)!!
+operator fun Vector.unaryMinus() = clone().multiply(-1)
 
-operator fun Vector.times(b: Int) = clone().multiply(b)!!
-operator fun Vector.times(b: Float) = clone().multiply(b)!!
-operator fun Vector.times(b: Double) = clone().multiply(b)!!
-operator fun Vector.times(b: Vector) = clone().multiply(b)!!
+operator fun Vector.times(b: Int) = clone().multiply(b)
+operator fun Vector.times(b: Float) = clone().multiply(b)
+operator fun Vector.times(b: Double) = clone().multiply(b)
+operator fun Vector.times(b: Vector) = clone().multiply(b)
 
 operator fun Vector.component1() = x
 operator fun Vector.component2() = y

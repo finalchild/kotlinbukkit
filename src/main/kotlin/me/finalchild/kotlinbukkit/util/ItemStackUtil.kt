@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2018 Bak Jaeon (finalchild) and Ranol
+ * Copyright 2017-2019 Bak Jaeon (finalchild) and Ranol
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ var ItemStack.displayName: String?
     set(name) {
         val itemMeta = this.itemMeta
         if (itemMeta != null) {
-            itemMeta.displayName = name
+            itemMeta.setDisplayName(name)
             this.itemMeta = itemMeta
         } else {
             throw UnsupportedOperationException("No ItemMeta for the item ${this} found.")
@@ -57,7 +57,7 @@ var ItemStack.name: String?
     set(name) {
         val itemMeta = this.itemMeta
         if (itemMeta != null) {
-            itemMeta.displayName = name
+            itemMeta.setDisplayName(name)
             this.itemMeta = itemMeta
         } else {
             throw UnsupportedOperationException("No ItemMeta for the item ${this} found.")
@@ -79,7 +79,7 @@ var ItemStack.localizedName: String?
     set(name) {
         val itemMeta = this.itemMeta
         if (itemMeta != null) {
-            itemMeta.localizedName = name
+            itemMeta.setLocalizedName(name)
             this.itemMeta = itemMeta
         } else {
             throw UnsupportedOperationException("No ItemMeta for the item ${this} found.")
