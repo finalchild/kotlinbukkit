@@ -187,22 +187,22 @@ fun <T> Location.playEffect(effect: Effect, data: T, radius: Int) = world.playEf
  *  The biome of this location
  */
 var Location.biome: Biome
-    get() = world.getBiome(blockX, blockZ)
+    get() = world.getBiome(blockX, blockY, blockZ)
     set(value) {
-        world.setBiome(blockX, blockZ, value)
+        world.setBiome(blockX, blockY, blockZ, value)
     }
 
 /**
  *  The temperature of this location
  */
 val Location.temperature: Double
-    get() = world.getTemperature(blockX, blockZ)
+    get() = world.getTemperature(blockX, blockY, blockZ)
 
 /**
  *  The humidity of this location
  */
 val Location.humidity: Double
-    get() = world.getHumidity(blockX, blockZ)
+    get() = world.getHumidity(blockX, blockY, blockZ)
 
 /**
  * Play a [Sound] at this location.
