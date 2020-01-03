@@ -1,2 +1,12 @@
-   kotlinbukkit
-   Copyright 2017-2018 Bak Jaeon (finalchild) and Ranol
+      =========================================================================
+      ==  NOTICE file corresponding to the section 4 d of                    ==
+      ==  the Apache License, Version 2.0,                                   ==
+      ==  in this case for the kotlinbukkit distribution.                 ==
+      =========================================================================
+
+      kotlinbukkit
+      Copyright 2017-2020 Bak Jaeon (finalchild) and Ranol
+
+      Kotlin Compiler
+      Copyright 2010-2019 JetBrains s.r.o and respective authors and developers
+

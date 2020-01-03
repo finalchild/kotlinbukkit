@@ -1,2 +1,0 @@
-   kotlinbukkit
-   Copyright 2017-2018 Bak Jaeon (finalchild) and Ranol
