@@ -22,7 +22,7 @@ plugins {
 }
 
 group 'me.finalchild'
-version '1.0.0-rc.10-SNAPSHOT'
+version '1.0.0-rc.10'
 
 description 'Provides Kotlin stdlib and extensions to Bukkit plugins.'
 
