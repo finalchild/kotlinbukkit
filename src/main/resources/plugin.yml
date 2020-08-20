@@ -1,7 +1,8 @@
 name: ${name}
+provides: [kotlin-stdlib-jdk8, kotlin-stdlib-jdk7, kotlin-stdlib]
 version: ${version}
 description: ${description}
 author: Final Child
 authors: [Ranol]
 main: me.finalchild.kotlinbukkit.KotlinBukkit
-api-version: 1.13
+api-version: "1.16"

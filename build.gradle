@@ -15,14 +15,15 @@
  */
 
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.3.61'
-    id 'com.github.johnrengelman.shadow' version '5.2.0'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.0'
+    id 'com.github.johnrengelman.shadow' version '6.0.0'
     id 'java-library'
     id 'maven-publish'
+    id 'me.finalchild.kopo.gradle' version '0.0.1-SNAPSHOT'
 }
 
 group 'me.finalchild'
-version '1.0.0-rc.10'
+version '1.0.0-rc.11'
 
 description 'Provides Kotlin stdlib and extensions to Bukkit plugins.'
 
@@ -36,23 +37,27 @@ repositories {
         name 'Sonatype OSSRH'
         url 'https://oss.sonatype.org/content/repositories/snapshots/'
     }
+    maven {
+        name 'finalchild-repo'
+        url 'https://maven.heartpattern.io/repository/finalchild/'
+    }
 }
 
 dependencies {
-    api(group: 'com.destroystokyo.paper', name: 'paper-api', version: '1.15.1-R0.1-SNAPSHOT') {
+    api(group: 'com.destroystokyo.paper', name: 'paper-api', version: '1.16.1-R0.1-SNAPSHOT') {
         exclude group: 'junit', module: 'junit'
     }
     api group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8'
 }
 
-sourceCompatibility = 13
+sourceCompatibility = 14
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
 compileJava {
-    inputs.property('moduleName', 'me.finalchild.kotlinbukkit');
+    inputs.property('moduleName', 'me.finalchild.kotlinbukkit')
     doFirst {
         options.compilerArgs = [
                 '--module-path', classpath.asPath
@@ -65,7 +70,7 @@ compileKotlin {
     destinationDir = compileJava.destinationDir
     kotlinOptions {
         freeCompilerArgs = ['-progressive']
-        jvmTarget = '12'
+        jvmTarget = '13'
     }
 }
 
@@ -94,14 +99,14 @@ shadowJar {
         exclude dependency(group: 'org.ow2.asm', name: 'asm-tree')
         exclude dependency(group: 'org.ow2.asm', name: 'asm')
     }
-    archiveClassifier = 'uber'
+    archiveClassifier.set('uber')
 }
 
 task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
     group = JavaBasePlugin.DOCUMENTATION_GROUP
     description = 'Assembles sources JAR'
-    archiveClassifier = 'sources'
+    archiveClassifier.set('sources')
 }
 
 artifacts {

@@ -24,17 +24,12 @@ import org.bukkit.plugin.java.JavaPlugin
 /**
  * Bukkit plugin to support writing scripts and plugins using Kotlin.
  * This class is singleton and the instance is created by Bukkit.
- * To get the instance, use [kotlinBukkit].
  */
-class KotlinBukkit : JavaPlugin(), Listener {
+object KotlinBukkit : JavaPlugin(), Listener {
 
     val checkUpdates: Boolean by config.delegate("check-updates")
 
     override fun onEnable() {
-        if (_kotlinBukkit != null) {
-            throw IllegalStateException()
-        }
-        _kotlinBukkit = this
         saveDefaultConfig()
         if (!isSnapshot && checkUpdates) {
             val latestRelease = getLatestRelease()
@@ -48,21 +43,7 @@ class KotlinBukkit : JavaPlugin(), Listener {
         }
     }
 
-    override fun onDisable() {
-        if (_kotlinBukkit == this) {
-            _kotlinBukkit = null
-        }
-    }
-
     val isSnapshot: Boolean
         get() = description.version.endsWith("-SNAPSHOT")
 
 }
-
-private var _kotlinBukkit: KotlinBukkit? = null
-
-/**
- * Singleton instance of [KotlinBukkit]. Should be created by Bukkit.
- */
-val kotlinBukkit: KotlinBukkit
-    get() = _kotlinBukkit ?: throw IllegalStateException()

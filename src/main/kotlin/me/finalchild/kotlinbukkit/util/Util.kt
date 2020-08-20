@@ -16,7 +16,7 @@
 
 package me.finalchild.kotlinbukkit.util
 
-import me.finalchild.kotlinbukkit.kotlinBukkit
+import me.finalchild.kotlinbukkit.KotlinBukkit
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
@@ -37,7 +37,7 @@ import kotlin.reflect.KClass
 inline fun <reified T : Event> on(
     priority: EventPriority = EventPriority.NORMAL,
     listener: Listener = SharedListener,
-    plugin: Plugin = kotlinBukkit,
+    plugin: Plugin = KotlinBukkit,
     crossinline executor: EventReceiver<T>.() -> Unit
 ) {
     Bukkit.getPluginManager().registerEvent(T::class.java, listener, priority, { _, eventObj ->
@@ -58,7 +58,7 @@ inline fun <reified T : Event> on(
     event: KClass<T>,
     priority: EventPriority = EventPriority.NORMAL,
     listener: Listener = SharedListener,
-    plugin: Plugin = kotlinBukkit,
+    plugin: Plugin = KotlinBukkit,
     crossinline executor: EventReceiver<T>.() -> Unit
 ) {
     Bukkit.getPluginManager().registerEvent(event.java, listener, priority, { _, eventObj ->
